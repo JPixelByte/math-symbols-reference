@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Symbols Reference</title>
+    <link rel="icon" type="image/jpeg" sizes="200x200" href="cryptography_icon.jpg">
+    <link rel="stylesheet" href="css/mathsymbols.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+<!-- <link href="https://fonts.googleapis.com/css2?family=Asimovian&family=Dancing+Script:wght@400..700&family=Michroma&family=Orbitron:wght@400..900&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet"> -->
+</head>
+
+
+
+
+<body>
+    <div class="container">
+        <h1>Mathematical Symbols Reference</h1>
+        <p class="subtitle">Discrete Math, Logic, Calculus, and Beyond</p>
+
+        <div class="toggle-container">
+            <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+            <button class="toggle-button" onclick="exportToPDF()">Export to PDF</button>
+            <!-- <button class="btn" onclick="clearFavorites()">Clear Favorites (<span id="favCount">0</span>)</button>  -->
+        </div>
+
+        <!-- DYNAMIC SEARCH FIELD -->
+        <!-- <div class="search-container">
+        <input type="text" class="search-box" id="searchBox"  autocomplete="off" placeholder="Search symbols..." onkeyup="searchSymbols()">
+        <span class="clear-search" id="clearSearch">X</span>
+        </div> -->
+    <!-- Perfectly centered, full-width search bar -->
+        <div class="search-wrapper">
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchBox" autocomplete="off"
+                    placeholder="Search symbols..." onkeyup="searchSymbols()">
+                <span class="clear-search" id="clearSearch">×</span>
+            </div>
+        </div>
+
+        <!-- DYNAMIC CATEGORIES WITH IDs -->
+      
+        <div class="category">
+            <h2 class="category-title">Arithmetic</h2>
+            <div id="arithmetic" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Logic</h2>
+            <div id="logic" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Number Sets</h2>
+            <div id="numberSets" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Set Theory</h2>
+            <div id="setTheory" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Greek Alphabet</h2>
+            <div id="greek" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Relations & Comparisons</h2>
+            <div id="relations" class="symbols-grid"></div>
+        </div>
+
+
+        <div class="category">
+            <h2 class="category-title">Algebra</h2>
+            <div id="algebra" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Geometry</h2>
+            <div id="geometry" class="symbols-grid"></div>
+        </div>
+
+
+        <div class="category">
+            <h2 class="category-title">Trigonometry</h2>
+            <div id="trigonometry" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Calculus</h2>
+            <div id="calculus" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Linear Algebra</h2>
+            <div id="linearAlgebra" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Probability & Statistics</h2>
+            <div id="probability" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Differential Equations</h2>
+            <div id="differentialEquations" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Physics</h2>
+            <div id="physics" class="symbols-grid"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">Chemistry</h2>
+            <div id="chemistry" class="symbols-grid"></div>
+        </div>
+   </div>
+
+    <!-- CLEANED & FIXED SCRIPT -->
+    <script>
+        const symbols = {
+            setTheory: [
+                {symbol: '∈', name: 'Element of', meaning: 'x ∈ A means x is an element of set A', link: 'Element', latex: '\\in'},
+                {symbol: '∉', name: 'Not Element of', meaning: 'x ∉ A means x is not an element of set A', link: 'Element', latex: '\\notin'},
+                {symbol: '⊂', name: 'Proper Subset', meaning: 'A ⊂ B means A is a proper subset of B', link: 'Subset', latex: '\\subset'},
+                {symbol: '⊆', name: 'Subset', meaning: 'A ⊆ B means A is a subset of B', link: 'Subset', latex: '\\subseteq'},
+                {symbol: '⊃', name: 'Proper Superset', meaning: 'A ⊃ B means A is a proper superset of B', link: 'Superset', latex: '\\supset'},
+                {symbol: '⊇', name: 'Superset', meaning: 'A ⊇ B means A is a superset of B', link: 'Superset', latex: '\\supseteq'},
+                {symbol: '∪', name: 'Union', meaning: 'A ∪ B is the union of sets A and B', link: 'Union', latex: '\\cup'},
+                {symbol: '∩', name: 'Intersection', meaning: 'A ∩ B is the intersection of sets A and B', link: 'Intersection', latex: '\\cap'},
+                {symbol: '∅', name: 'Empty Set', meaning: 'The set containing no elements', link: 'EmptySet', latex: '\\emptyset'},
+                {symbol: '℘', name: 'Power Set', meaning: '℘(A) is the set of all subsets of A', link: 'PowerSet', latex: '\\wp'},
+                {symbol: '×', name: 'Cartesian Product', meaning: 'A × B is the set of all ordered pairs', link: 'CartesianProduct', latex: '\\times'},
+                {symbol: '∖', name: 'Set Difference', meaning: 'A ∖ B elements in A but not in B', link: 'SetDifference', latex: '\\setminus'},
+                {symbol: '△', name: 'Symmetric Difference', meaning: 'A △ B = (A∖B) ∪ (B∖A)', link: 'SymmetricDifference', latex: '\\triangle'},
+                {symbol: '|A|', name: 'Cardinality', meaning: 'Number of elements in set A', link: 'Cardinality', latex: '\\lvert A \\rvert'}
+            ],
+            logic: [
+                {symbol: '∧', name: 'Logical AND', meaning: 'P ∧ Q is true if both are true', link: 'AND', latex: '\\land'},
+                {symbol: '∨', name: 'Logical OR', meaning: 'P ∨ Q is true if at least one is true', link: 'OR', latex: '\\lor'},
+                {symbol: '¬', name: 'Logical NOT', meaning: '¬P is true if P is false', link: 'NOT', latex: '\\lnot'},
+                {symbol: '⇒', name: 'Implies', meaning: 'P ⇒ Q means if P then Q', link: 'Implies', latex: '\\Rightarrow'},
+                {symbol: '⇔', name: 'If and Only If', meaning: 'P ⇔ Q means P ⇒ Q and Q ⇒ P', link: 'Iff', latex: '\\Leftrightarrow'},
+                {symbol: '∀', name: 'For All', meaning: 'Universal quantifier', link: 'UniversalQuantifier', latex: '\\forall'},
+                {symbol: '∃', name: 'There Exists', meaning: 'Existential quantifier', link: 'ExistentialQuantifier', latex: '\\exists'},
+                {symbol: '∄', name: 'Does Not Exist', meaning: 'Negation of existential quantifier', link: 'ExistentialQuantifier', latex: '\\nexists'},
+                {symbol: '⊤', name: 'True', meaning: 'Logical truth value', link: 'True', latex: '\\top'},
+                {symbol: '⊥', name: 'False', meaning: 'Logical false or contradiction', link: 'False', latex: '\\bot'},
+                {symbol: '⊕', name: 'XOR', meaning: 'Exclusive or', link: 'XOR', latex: '\\oplus'},
+                {symbol: '⊢', name: 'Proves', meaning: 'Syntactic consequence', link: 'Proves', latex: '\\vdash'}
+            ],
+            numberSets: [
+                {symbol: 'ℕ', name: 'Natural Numbers', meaning: '{0, 1, 2, 3, ...}', link: 'NaturalNumber', latex: '\\mathbb{N}'},
+                {symbol: 'ℤ', name: 'Integers', meaning: '{..., -2, -1, 0, 1, 2, ...}', link: 'Integer', latex: '\\mathbb{Z}'},
+                {symbol: 'ℚ', name: 'Rational Numbers', meaning: 'Numbers expressible as p/q', link: 'RationalNumber', latex: '\\mathbb{Q}'},
+                {symbol: 'ℝ', name: 'Real Numbers', meaning: 'All rational and irrational numbers', link: 'RealNumber', latex: '\\mathbb{R}'},
+                {symbol: 'ℂ', name: 'Complex Numbers', meaning: 'Numbers of form a + bi', link: 'ComplexNumber', latex: '\\mathbb{C}'},
+                {symbol: 'ℙ', name: 'Prime Numbers', meaning: 'Numbers divisible only by 1 and themselves', link: 'PrimeNumber', latex: '\\mathbb{P}'},
+                {symbol: 'ℤ⁺', name: 'Positive Integers', meaning: '{1, 2, 3, ...}', link: 'PositiveInteger', latex: '\\mathbb{Z}^+'},
+                {symbol: 'ℝ⁺', name: 'Positive Reals', meaning: 'Real numbers greater than 0', link: 'PositiveReal', latex: '\\mathbb{R}^+'}
+            ],
+            arithmetic: [
+                {symbol: '+', name: 'Addition', meaning: 'Sum of two numbers', link: 'Addition', latex: '+'},
+                {symbol: '−', name: 'Subtraction', meaning: 'Difference of two numbers', link: 'Subtraction', latex: '-'},
+                {symbol: '×', name: 'Multiplication', meaning: 'Product of two numbers', link: 'Multiplication', latex: '\\times'},
+                {symbol: '÷', name: 'Division', meaning: 'Quotient of two numbers', link: 'Division', latex: '\\div'},
+                {symbol: '±', name: 'Plus-Minus', meaning: 'Indicates two possible values', link: 'PlusMinus', latex: '\\pm'},
+                {symbol: '∓', name: 'Minus-Plus', meaning: 'Opposite of ±', link: 'MinusPlus', latex: '\\mp'},
+                {symbol: '√', name: 'Square Root', meaning: 'Principal square root', link: 'SquareRoot', latex: '\\sqrt{x}'},
+                {symbol: '∛', name: 'Cube Root', meaning: 'Cube root', link: 'CubeRoot', latex: '\\sqrt[3]{x}'},
+                {symbol: '∜', name: 'Fourth Root', meaning: 'Fourth root', link: 'Root', latex: '\\sqrt[4]{x}'},
+                {symbol: '|x|', name: 'Absolute Value', meaning: 'Distance from zero', link: 'AbsoluteValue', latex: '\\lvert x \\rvert'},
+                {symbol: 'n!', name: 'Factorial', meaning: 'Product of integers from 1 to n', link: 'Factorial', latex: 'n!'},
+                {symbol: 'mod', name: 'Modulo', meaning: 'Remainder after division', link: 'Mod', latex: '\\mod'},
+                {symbol: '⌊x⌋', name: 'Floor', meaning: 'Largest integer ≤ x', link: 'Floor', latex: '\\lfloor x \\rfloor'},
+                {symbol: '⌈x⌉', name: 'Ceiling', meaning: 'Smallest integer ≥ x', link: 'Ceiling', latex: '\\lceil x \\rceil'},
+                {symbol: 'gcd', name: 'GCD', meaning: 'Greatest common divisor', link: 'GreatestCommonDivisor', latex: '\\gcd'},
+                {symbol: 'lcm', name: 'LCM', meaning: 'Least common multiple', link: 'LeastCommonMultiple', latex: '\\operatorname{lcm}'}
+            ],
+       
+
+            relations: [
+                {symbol: '=', name: 'Equality', meaning: 'Left side equals right side', link: 'Equality', latex: '='},
+                {symbol: '≠', name: 'Inequality', meaning: 'Left side not equal to right side', link: 'Inequality', latex: '\\neq'},
+                {symbol: '<', name: 'Less Than', meaning: 'a < b means a is less than b', link: 'LessThan', latex: '<'},
+                {symbol: '>', name: 'Greater Than', meaning: 'a > b means a is greater than b', link: 'GreaterThan', latex: '>'},
+                {symbol: '≤', name: 'Less Than or Equal', meaning: 'a ≤ b means a is less than or equal to b', link: 'LessThanOrEqualTo', latex: '\\leq'},
+                {symbol: '≥', name: 'Greater Than or Equal', meaning: 'a ≥ b means a is greater than or equal to b', link: 'GreaterThanOrEqualTo', latex: '\\geq'},
+                {symbol: '≡', name: 'Congruence', meaning: 'a ≡ b mod n', link: 'Congruence', latex: '\\equiv'},
+                {symbol: '≈', name: 'Approximately Equal', meaning: 'a ≈ b means a is approximately equal to b', link: 'ApproximatelyEqual', latex: '\\approx'},
+                {symbol: '∝', name: 'Proportional To', meaning: 'a ∝ b means a is proportional to b', link: 'ProportionalTo', latex: '\\propto'},
+                {symbol: '≪', name: 'Much Less Than', meaning: 'a ≪ b means a is much less than b', link: 'MuchLessThan', latex: '\\ll'},
+                {symbol: '≫', name: 'Much Greater Than', meaning: 'a ≫ b means a is much greater than b', link: 'MuchGreaterThan', latex: '\\gg'}
+            ],
+            
+            greek: [
+                {symbol: 'α', name: 'Alpha', meaning: 'Lowercase α', link: 'Alpha', latex: '\\alpha'},
+                {symbol: 'Α', name: 'Alpha (Upper)', meaning: 'Uppercase Α', link: 'Alpha', latex: 'A'},
+                {symbol: 'β', name: 'Beta', meaning: 'Lowercase β', link: 'Beta', latex: '\\beta'},
+                {symbol: 'Β', name: 'Beta (Upper)', meaning: 'Uppercase Β', link: 'Beta', latex: 'B'},
+                {symbol: 'γ', name: 'Gamma', meaning: 'Lowercase γ', link: 'Gamma', latex: '\\gamma'},
+                {symbol: 'Γ', name: 'Gamma (Upper)', meaning: 'Uppercase Γ', link: 'Gamma', latex: '\\Gamma'},
+                {symbol: 'δ', name: 'Delta', meaning: 'Lowercase δ', link: 'Delta', latex: '\\delta'},
+                {symbol: 'Δ', name: 'Delta (Upper)', meaning: 'Uppercase Δ', link: 'Delta', latex: '\\Delta'},
+                {symbol: 'ε', name: 'Epsilon', meaning: 'Lowercase ε (variant)', link: 'Epsilon', latex: '\\varepsilon'},
+                {symbol: 'ϵ', name: 'Epsilon (variant)', meaning: 'Lunate epsilon ϵ', link: 'Epsilon', latex: '\\epsilon'},
+                {symbol: 'Ε', name: 'Epsilon (Upper)', meaning: 'Uppercase Ε', link: 'Epsilon', latex: 'E'},
+                {symbol: 'ζ', name: 'Zeta', meaning: 'Lowercase ζ', link: 'Zeta', latex: '\\zeta'},
+                {symbol: 'Ζ', name: 'Zeta (Upper)', meaning: 'Uppercase Ζ', link: 'Zeta', latex: 'Z'},
+                {symbol: 'η', name: 'Eta', meaning: 'Lowercase η', link: 'Eta', latex: '\\eta'},
+                {symbol: 'Η', name: 'Eta (Upper)', meaning: 'Uppercase Η', link: 'Eta', latex: 'H'},
+                {symbol: 'θ', name: 'Theta', meaning: 'Lowercase θ', link: 'Theta', latex: '\\theta'},
+                {symbol: 'ϑ', name: 'Theta (variant)', meaning: 'Alternate theta ϑ', link: 'Theta', latex: '\\vartheta'},
+                {symbol: 'Θ', name: 'Theta (Upper)', meaning: 'Uppercase Θ', link: 'Theta', latex: '\\Theta'},
+                {symbol: 'ι', name: 'Iota', meaning: 'Lowercase ι', link: 'Iota', latex: '\\iota'},
+                {symbol: 'Ι', name: 'Iota (Upper)', meaning: 'Uppercase Ι', link: 'Iota', latex: 'I'},
+                {symbol: 'κ', name: 'Kappa', meaning: 'Lowercase κ', link: 'Kappa', latex: '\\kappa'},
+                {symbol: 'ϰ', name: 'Kappa (variant)', meaning: 'Curly kappa ϰ', link: 'Kappa', latex: '\\varkappa'},
+                {symbol: 'Κ', name: 'Kappa (Upper)', meaning: 'Uppercase Κ', link: 'Kappa', latex: 'K'},
+                {symbol: 'λ', name: 'Lambda', meaning: 'Lowercase λ', link: 'Lambda', latex: '\\lambda'},
+                {symbol: 'Λ', name: 'Lambda (Upper)', meaning: 'Uppercase Λ', link: 'Lambda', latex: '\\Lambda'},
+                {symbol: 'μ', name: 'Mu', meaning: 'Lowercase μ', link: 'Mu', latex: '\\mu'},
+                {symbol: 'Μ', name: 'Mu (Upper)', meaning: 'Uppercase Μ', link: 'Mu', latex: 'M'},
+                {symbol: 'ν', name: 'Nu', meaning: 'Lowercase ν', link: 'Nu', latex: '\\nu'},
+                {symbol: 'Ν', name: 'Nu (Upper)', meaning: 'Uppercase Ν', link: 'Nu', latex: 'N'},
+                {symbol: 'ξ', name: 'Xi', meaning: 'Lowercase ξ', link: 'Xi', latex: '\\xi'},
+                {symbol: 'Ξ', name: 'Xi (Upper)', meaning: 'Uppercase Ξ', link: 'Xi', latex: '\\Xi'},
+                {symbol: 'ο', name: 'Omicron', meaning: 'Lowercase ο', link: 'Omicron', latex: 'o'},
+                {symbol: 'Ο', name: 'Omicron (Upper)', meaning: 'Uppercase Ο', link: 'Omicron', latex: 'O'},
+                {symbol: 'π', name: 'Pi', meaning: 'Lowercase π', link: 'Pi', latex: '\\pi'},
+                {symbol: 'ϖ', name: 'Pi (variant)', meaning: 'Curly pi ϖ', link: 'Pi', latex: '\\varpi'},
+                {symbol: 'Π', name: 'Pi (Upper)', meaning: 'Uppercase Π', link: 'Pi', latex: '\\Pi'},
+                {symbol: 'ρ', name: 'Rho', meaning: 'Lowercase ρ', link: 'Rho', latex: '\\rho'},
+                {symbol: 'ϱ', name: 'Rho (variant)', meaning: 'Curly rho ϱ', link: 'Rho', latex: '\\varrho'},
+                {symbol: 'Ρ', name: 'Rho (Upper)', meaning: 'Uppercase Ρ', link: 'Rho', latex: 'P'},
+                {symbol: 'σ', name: 'Sigma', meaning: 'Lowercase σ', link: 'Sigma', latex: '\\sigma'},
+                {symbol: 'ς', name: 'Sigma (final)', meaning: 'Final sigma ς', link: 'Sigma', latex: '\\varsigma'},
+                {symbol: 'Σ', name: 'Sigma (Upper)', meaning: 'Uppercase Σ', link: 'Sigma', latex: '\\Sigma'},
+                {symbol: 'τ', name: 'Tau', meaning: 'Lowercase τ', link: 'Tau', latex: '\\tau'},
+                {symbol: 'Τ', name: 'Tau (Upper)', meaning: 'Uppercase Τ', link: 'Tau', latex: 'T'},
+                {symbol: 'υ', name: 'Upsilon', meaning: 'Lowercase υ', link: 'Upsilon', latex: '\\upsilon'},
+                {symbol: 'Υ', name: 'Upsilon (Upper)', meaning: 'Uppercase Υ', link: 'Upsilon', latex: '\\Upsilon'},
+                {symbol: 'φ', name: 'Phi', meaning: 'Lowercase φ', link: 'Phi', latex: '\\phi'},
+                {symbol: 'ϕ', name: 'Phi (variant)', meaning: 'Curly phi ϕ', link: 'Phi', latex: '\\varphi'},
+                {symbol: 'Φ', name: 'Phi (Upper)', meaning: 'Uppercase Φ', link: 'Phi', latex: '\\Phi'},
+                {symbol: 'χ', name: 'Chi', meaning: 'Lowercase χ', link: 'Chi', latex: '\\chi'},
+                {symbol: 'Χ', name: 'Chi (Upper)', meaning: 'Uppercase Χ', link: 'Chi', latex: 'X'},
+                {symbol: 'ψ', name: 'Psi', meaning: 'Lowercase ψ', link: 'Psi', latex: '\\psi'},
+                {symbol: 'Ψ', name: 'Psi (Upper)', meaning: 'Uppercase Ψ', link: 'Psi', latex: '\\Psi'},
+                {symbol: 'ω', name: 'Omega', meaning: 'Lowercase ω', link: 'Omega', latex: '\\omega'},
+                {symbol: 'Ω', name: 'Omega (Upper)', meaning: 'Uppercase Ω', link: 'Omega', latex: '\\Omega'}
+            ],
+
+            algebra: [
+                {symbol: '√', name: 'Radical / Root', meaning: 'nth root', link: 'Root', latex: '\\sqrt[n]{x}'},
+                {symbol: '∛', name: 'Cube Root', meaning: 'Cube root', link: 'CubeRoot', latex: '\\sqrt[3]{x}'},
+                {symbol: 'log', name: 'Logarithm', meaning: 'Logarithm base b', link: 'Logarithm', latex: '\\log_b x'},
+                {symbol: 'ln', name: 'Natural Log', meaning: 'Natural logarithm', link: 'NaturalLogarithm', latex: '\\ln'},
+                {symbol: 'lg', name: 'Log Base 10', meaning: 'Common logarithm', link: 'Logarithm', latex: '\\lg'},
+                {symbol: '∑', name: 'Summation', meaning: 'Sum from i=a to b', link: 'Summation', latex: '\\sum_{i=a}^{b}'},
+                {symbol: '∏', name: 'Product', meaning: 'Product from i=a to b', link: 'ProductNotation', latex: '\\prod_{i=a}^{b}'},
+                {symbol: 'a²', name: 'Squared', meaning: 'a raised to the power 2', link: 'Exponentiation', latex: 'a^2'},
+                {symbol: 'aⁿ', name: 'Exponent', meaning: 'a raised to the power n', link: 'Exponentiation', latex: 'a^n'},
+                {symbol: 'i', name: 'Imaginary Unit', meaning: 'i² = -1', link: 'ImaginaryUnit', latex: 'i'},
+                {symbol: 'e', name: 'Euler’s Number', meaning: 'Base of natural logarithm', link: 'EulersNumber', latex: 'e'},
+                {symbol: '∞', name: 'Infinity', meaning: 'Unbounded quantity', link: 'Infinity', latex: '\\infty'}
+            ],
+            geometry: [
+                {symbol: '∠', name: 'Angle', meaning: 'Angle between two lines', link: 'Angle', latex: '\\angle'},
+                {symbol: '∠', name: 'Measured Angle', meaning: 'Angle with measure', link: 'Angle', latex: '\\measuredangle'},
+                {symbol: '°', name: 'Degree', meaning: 'Unit of angle measurement', link: 'Degree', latex: '^\\circ'},
+                {symbol: '⊥', name: 'Perpendicular', meaning: 'Lines are perpendicular', link: 'Perpendicular', latex: '\\perp'},
+                {symbol: '∥', name: 'Parallel', meaning: 'Lines are parallel', link: 'Parallel', latex: '\\parallel'},
+                {symbol: '△', name: 'Triangle', meaning: 'Triangle symbol', link: 'Triangle', latex: '\\triangle'},
+                {symbol: '▱', name: 'Parallelogram', meaning: 'Parallelogram symbol', link: 'Parallelogram', latex: '\\parallelogram'},
+                {symbol: '□', name: 'Square', meaning: 'Square symbol', link: 'Square', latex: '\\square'},
+                {symbol: '◻', name: 'White Square', meaning: 'Empty square (often rectangle)', link: 'Rectangle', latex: '\\blacksquare'}, // or \\square
+                {symbol: '○', name: 'Circle', meaning: 'Circle symbol', link: 'Circle', latex: '\\circ'},
+                {symbol: '●', name: 'Filled Circle', meaning: 'Disk / filled circle', link: 'Circle', latex: '\\bullet'},
+                {symbol: '≅', name: 'Congruent', meaning: 'Congruent figures', link: 'Congruent', latex: '\\cong'},
+                {symbol: '∼', name: 'Similar', meaning: 'Similar figures', link: 'Similar', latex: '\\sim'},
+                {symbol: '≈', name: 'Approximately Equal', meaning: 'Approximately equal', link: 'ApproximatelyEqual', latex: '\\approx'}
+            ],
+
+            trigonometry: [
+                {symbol: 'sin', name: 'Sine', meaning: 'Sine function', link: 'Sine', latex: '\\sin'},
+                {symbol: 'cos', name: 'Cosine', meaning: 'Cosine function', link: 'Cosine', latex: '\\cos'},
+                {symbol: 'tan', name: 'Tangent', meaning: 'Tangent function', link: 'Tangent', latex: '\\tan'},
+                {symbol: 'csc', name: 'Cosecant', meaning: 'Cosecant function', link: 'Cosecant', latex: '\\csc'},
+                {symbol: 'sec', name: 'Secant', meaning: 'Secant function', link: 'Secant', latex: '\\sec'},
+                {symbol: 'cot', name: 'Cotangent', meaning: 'Cotangent function', link: 'Cotangent', latex: '\\cot'},
+                {symbol: 'sin⁻¹', name: 'Arcsine', meaning: 'Inverse sine', link: 'InverseTrigonometricFunctions', latex: '\\arcsin'},
+                {symbol: 'cos⁻¹', name: 'Arccosine', meaning: 'Inverse cosine', link: 'InverseTrigonometricFunctions', latex: '\\arccos'},
+                {symbol: 'tan⁻¹', name: 'Arctangent', meaning: 'Inverse tangent', link: 'InverseTrigonometricFunctions', latex: '\\arctan'},
+                {symbol: 'sinh', name: 'Hyperbolic Sine', meaning: 'Hyperbolic sine', link: 'HyperbolicFunctions', latex: '\\sinh'},
+                {symbol: 'cosh', name: 'Hyperbolic Cosine', meaning: 'Hyperbolic cosine', link: 'HyperbolicFunctions', latex: '\\cosh'},
+                {symbol: 'tanh', name: 'Hyperbolic Tangent', meaning: 'Hyperbolic tangent', link: 'HyperbolicFunctions', latex: '\\tanh'}
+            ],
+
+            calculus: [
+                {symbol: '∫', name: 'Integral', meaning: 'Integration symbol', link: 'Integral', latex: '\\int'},
+                {symbol: '∬', name: 'Double Integral', meaning: 'Integration over 2D region', link: 'DoubleIntegral', latex: '\\iint'},
+                {symbol: '∭', name: 'Triple Integral', meaning: 'Integration over 3D region', link: 'TripleIntegral', latex: '\\iiint'},
+                {symbol: '∮', name: 'Contour Integral', meaning: 'Line integral around closed curve', link: 'ContourIntegral', latex: '\\oint'},
+                {symbol: 'dy/dx', name: 'Derivative', meaning: 'Rate of change', link: 'Derivative', latex: '\\frac{dy}{dx}'},
+                {symbol: '∂', name: 'Partial Derivative', meaning: 'Derivative with respect to one variable', link: 'PartialDerivative', latex: '\\partial'},
+                {symbol: '∇', name: 'Nabla/Del', meaning: 'Vector differential operator', link: 'Nabla', latex: '\\nabla'},
+                {symbol: 'lim', name: 'Limit', meaning: 'Limit as x approaches a value', link: 'Limit', latex: '\\lim'},
+                {symbol: '→', name: 'Approaches', meaning: 'x → a means x approaches a', link: 'Limit', latex: '\\to'},
+                {symbol: '∞', name: 'Infinity', meaning: 'Unbounded quantity', link: 'Infinity', latex: '\\infty'},
+                {symbol: 'ε', name: 'Epsilon', meaning: 'Small positive quantity', link: 'Epsilon', latex: '\\varepsilon'},
+                {symbol: 'δ', name: 'Delta', meaning: 'Small change', link: 'Delta', latex: '\\delta'},
+                {symbol: '∇', name: 'Gradient', meaning: 'Vector of partial derivatives', link: 'Gradient', latex: '\\nabla'},  // same symbol, different meaning
+                {symbol: 'div', name: 'Divergence', meaning: 'Measures flow out of a point', link: 'Divergence', latex: '\\operatorname{div}'},
+                {symbol: 'curl', name: 'Curl', meaning: 'Measures rotation of vector field', link: 'Curl', latex: '\\operatorname{curl}'}
+            ],
+          
+           linearAlgebra: [
+                {symbol: 'A', name: 'Matrix', meaning: 'General matrix A', link: 'Matrix', latex: '\\mathbf{A}'},
+                {symbol: 'I', name: 'Identity Matrix', meaning: 'Identity matrix', link: 'IdentityMatrix', latex: '\\mathbf{I}'},
+                {symbol: '0', name: 'Zero Matrix', meaning: 'Matrix of all zeros', link: 'ZeroMatrix', latex: '\\mathbf{0}'},
+                {symbol: 'det', name: 'Determinant', meaning: 'Determinant of a matrix', link: 'Determinant', latex: '\\det'},
+                {symbol: 'rank', name: 'Rank', meaning: 'Rank of a matrix', link: 'Rank', latex: '\\operatorname{rank}'},
+                {symbol: 'trace', name: 'Trace', meaning: 'Sum of diagonal elements', link: 'Trace', latex: '\\operatorname{tr}'},
+                {symbol: 'Aᵀ', name: 'Transpose', meaning: 'Transpose of matrix A', link: 'Transpose', latex: 'A^\\top'},
+                {symbol: 'A*', name: 'Conjugate Transpose', meaning: 'Hermitian transpose (dagger)', link: 'Adjoint', latex: 'A^*'},
+                {symbol: 'λ', name: 'Eigenvalue', meaning: 'Eigenvalue of a matrix', link: 'Eigenvalue', latex: '\\lambda'},
+                {symbol: 'v', name: 'Eigenvector', meaning: 'Eigenvector of a matrix', link: 'Eigenvector', latex: '\\mathbf{v}'},
+                {symbol: 'A⁻¹', name: 'Inverse', meaning: 'Inverse of a matrix', link: 'InverseMatrix', latex: 'A^{-1}'},
+                {symbol: 'span', name: 'Span', meaning: 'Set of all linear combinations', link: 'Span', latex: '\\operatorname{span}'},
+                {symbol: 'ker', name: 'Kernel / Null Space', meaning: 'Null space of a linear map', link: 'Kernel', latex: '\\ker'},
+                {symbol: 'im', name: 'Image / Range', meaning: 'Column space of a matrix', link: 'Image', latex: '\\operatorname{im}'},
+                {symbol: 'dim', name: 'Dimension', meaning: 'Dimension of a vector space', link: 'Dimension', latex: '\\dim'},
+                {symbol: 'nullity', name: 'Nullity', meaning: 'Dimension of the kernel', link: 'Nullity', latex: '\\operatorname{nullity}'}
+            ],
+
+            probability: [
+                {symbol: 'P(A)', name: 'Probability of A', meaning: 'Probability of event A', link: 'Probability', latex: 'P(A)'},
+                {symbol: 'P(A|B)', name: 'Conditional Probability', meaning: 'Probability of A given B', link: 'ConditionalProbability', latex: 'P(A \\mid B)'},
+                {symbol: 'P(A∪B)', name: 'Union Probability', meaning: 'Probability of A or B', link: 'Probability', latex: 'P(A \\cup B)'},
+                {symbol: 'P(A∩B)', name: 'Intersection Probability', meaning: 'Probability of A and B', link: 'Probability', latex: 'P(A \\cap B)'},
+                {symbol: 'E[X]', name: 'Expected Value', meaning: 'Expected value of random variable X', link: 'ExpectedValue', latex: '\\mathbb{E}[X]'},
+                {symbol: 'Var(X)', name: 'Variance', meaning: 'Variance of random variable X', link: 'Variance', latex: '\\operatorname{Var}(X)'},
+                {symbol: 'σ²', name: 'Variance (σ²)', meaning: 'Population variance', link: 'Variance', latex: '\\sigma^2'},
+                {symbol: 'σ', name: 'Standard Deviation', meaning: 'Standard deviation', link: 'StandardDeviation', latex: '\\sigma'},
+                {symbol: 'μ', name: 'Mean', meaning: 'Population mean', link: 'Mean', latex: '\\mu'},
+                {symbol: 'Cov(X,Y)', name: 'Covariance', meaning: 'Covariance between X and Y', link: 'Covariance', latex: '\\operatorname{Cov}(X,Y)'},
+                {symbol: 'Corr(X,Y)', name: 'Correlation', meaning: 'Correlation coefficient', link: 'Correlation', latex: '\\operatorname{Corr}(X,Y)'},
+                {symbol: '∼', name: 'Distributed As', meaning: 'X is distributed as...', link: 'Distribution', latex: '\\sim'},
+                {symbol: 'N(μ, σ²)', name: 'Normal Distribution', meaning: 'Normal distribution with mean μ and variance σ²', link: 'NormalDistribution', latex: '\\mathcal{N}(\\mu, \\sigma^2)'},
+                {symbol: 'Bin(n,p)', name: 'Binomial', meaning: 'Binomial distribution', link: 'BinomialDistribution', latex: '\\operatorname{Bin}(n,p)'},
+                {symbol: 'Pois(λ)', name: 'Poisson', meaning: 'Poisson distribution', link: 'PoissonDistribution', latex: '\\operatorname{Pois}(\\lambda)'},
+                {symbol: 'Bern(p)', name: 'Bernoulli', meaning: 'Bernoulli distribution', link: 'BernoulliDistribution', latex: '\\operatorname{Bern}(p)'},
+                {symbol: 'Exp(λ)', name: 'Exponential', meaning: 'Exponential distribution', link: 'ExponentialDistribution', latex: '\\operatorname{Exp}(\\lambda)'},
+                {symbol: 'U(a,b)', name: 'Uniform', meaning: 'Continuous uniform distribution', link: 'UniformDistribution', latex: '\\operatorname{Unif}(a,b)'},
+                {symbol: 'χ²', name: 'Chi-Squared', meaning: 'Chi-squared distribution', link: 'ChiSquared', latex: '\\chi^2'},
+                {symbol: 'F', name: 'F-Distribution', meaning: 'F-distribution', link: 'FDistribution', latex: 'F'},
+                {symbol: 't', name: 'Student’s t', meaning: 'Student’s t-distribution', link: 'StudentT', latex: 't'}
+            ],
+
+            differentialEquations: [
+                {symbol: 'dy/dx', name: 'First Derivative', meaning: 'Ordinary derivative', link: 'Derivative', latex: '\\frac{dy}{dx}'},
+                {symbol: 'd²y/dx²', name: 'Second Derivative', meaning: 'Second-order derivative', link: 'HigherOrderDerivative', latex: '\\frac{d^2 y}{dx^2}'},
+                {symbol: 'dⁿy/dxⁿ', name: 'nth Derivative', meaning: 'nth-order derivative', link: 'HigherOrderDerivative', latex: '\\frac{d^n y}{dx^n}'},
+                {symbol: '∂u/∂x', name: 'Partial Derivative', meaning: 'Partial with respect to x', link: 'PartialDerivative', latex: '\\frac{\\partial u}{\\partial x}'},
+                {symbol: '∂²u/∂x²', name: 'Second Partial', meaning: 'Second partial derivative', link: 'PartialDerivative', latex: '\\frac{\\partial^2 u}{\\partial x^2}'},
+                {symbol: '∇', name: 'Del / Nabla', meaning: 'Gradient operator', link: 'Nabla', latex: '\\nabla'},
+                {symbol: '∇²', name: 'Laplacian', meaning: 'Laplace operator', link: 'Laplacian', latex: '\\nabla^2'},
+                {symbol: '∇·F', name: 'Divergence', meaning: 'Divergence of vector field', link: 'Divergence', latex: '\\nabla \\cdot \\mathbf{F}'},
+                {symbol: '∇×F', name: 'Curl', meaning: 'Curl of vector field', link: 'Curl', latex: '\\nabla \\times \\mathbf{F}'},
+                {symbol: 'dy/dx = f(x)', name: 'First-Order ODE', meaning: 'General first-order ODE', link: 'DifferentialEquation', latex: '\\frac{dy}{dx} = f(x)'},
+                {symbol: 'y′ + P(x)y = Q(x)', name: 'Linear First-Order', meaning: 'Standard linear form', link: 'LinearDifferentialEquation', latex: "y' + P(x)y = Q(x)"},
+                {symbol: 'd²y/dx² + a dy/dx + b y = 0', name: 'Homogeneous 2nd-Order', meaning: 'Constant-coefficient homogeneous', link: 'SecondOrderDifferentialEquation', latex: '\\frac{d^2 y}{dx^2} + a <br>\\frac{dy}{dx} + b y = 0'},
+                {symbol: 'ẏ', name: 'Dot Notation', meaning: 'Time derivative (physics)', link: 'Notation', latex: '\\dot{y}'},
+                {symbol: 'ÿ', name: 'Double Dot', meaning: 'Second time derivative', link: 'Notation', latex: '\\ddot{y}'},
+                {symbol: 'D', name: 'Differential Operator', meaning: 'D = d/dx', link: 'DifferentialOperator', latex: 'D = \\frac{d}{dx}'},
+                {symbol: 'ℒ{f(t)}', name: 'Laplace Transform', meaning: 'Laplace transform of f(t)', link: 'LaplaceTransform', latex: '\\mathcal{L}\\left\\{f(t)\\right\\}'},
+                {symbol: 'ℱ{f(x)}', name: 'Fourier Transform', meaning: 'Fourier transform', link: 'FourierTransform', latex: '\\mathcal{F}\\left\\{f(x)\\right\\}'}
+            ],
+
+            physics: [
+                {symbol: 'F = ma', name: 'Newton’s 2nd Law', meaning: 'Force = mass × acceleration', link: 'NewtonsLawsOfMotion', latex: 'F = ma'},
+                {symbol: 'E = mc²', name: 'Mass-Energy', meaning: 'Rest energy', link: 'MassEnergyEquivalence', latex: 'E = mc^2'},
+                {symbol: 'v = λf', name: 'Wave Equation', meaning: 'Speed = wavelength × frequency', link: 'Wave', latex: 'v = \\lambda f'},
+                {symbol: 'p = mv', name: 'Momentum', meaning: 'Linear momentum', link: 'Momentum', latex: 'p = mv'},
+                {symbol: 'KE = ½mv²', name: 'Kinetic Energy', meaning: 'Translational KE', link: 'KineticEnergy', latex: '\\tfrac{1}{2}mv^2'},
+                {symbol: 'PE = mgh', name: 'Gravitational PE', meaning: 'Near Earth', link: 'PotentialEnergy', latex: 'PE = mgh'},
+                {symbol: 'W = F·d', name: 'Work', meaning: 'Work-energy theorem', link: 'WorkPhysics', latex: 'W = \\mathbf{F} \\cdot \\mathbf{d}'},
+                {symbol: 'P = W/t', name: 'Power', meaning: 'Rate of work', link: 'PowerPhysics', latex: 'P = \\frac{W}{t}'},
+                {symbol: 'F = G m₁m₂/r²', name: 'Newton’s Gravity', meaning: 'Universal gravitation', link: 'NewtonsLawOfUniversalGravitation', latex: 'F = G \\frac{m_1 m_2}{r^2}'},
+                {symbol: '∇·E = ρ/ε₀', name: 'Gauss’s Law (E)', meaning: 'Electric flux', link: 'GausssLaw', latex: '\\nabla \\cdot \\mathbf{E} =<br>\\frac{\\rho}{\\varepsilon_0}'},
+                {symbol: '∇·B = 0', name: 'Gauss’s Law (B)', meaning: 'No magnetic monopoles', link: 'GausssLawMagnetism', latex: '\\nabla \\cdot \\mathbf{B} = 0'},
+                {symbol: '∇×E = -∂B/∂t', name: 'Faraday’s Law', meaning: 'Induced EMF', link: 'FaradaysLaw', latex: '\\nabla \\times \\mathbf{E} =<br>-\\frac{\\partial<br>\\mathbf{B}}{\\partial t}'},
+                {symbol: '∇×B = μ₀J + μ₀ε₀ ∂E/∂t', name: 'Ampère-Maxwell', meaning: 'Magnetic field sources', link: 'AmperesLaw', latex: '\\nabla \\times<br>\\mathbf{B} =<br>\\mu_0 \\mathbf{J}<br>+ \\mu_0 \\varepsilon_0<br>\\frac{\\partial \\mathbf{E}}<br>{\\partial t}'},
+                {symbol: 'F = qE', name: 'Electric Force', meaning: 'Force on a charge', link: 'ElectricField', latex: '\\mathbf{F} = q \\mathbf{E}'},
+                {symbol: 'F = qv×B', name: 'Lorentz Force', meaning: 'Magnetic force on moving charge', link: 'LorentzForce', latex: '\\mathbf{F} = q \\mathbf{v}<br>\\times \\mathbf{B}'},
+                {symbol: 'c', name: 'Speed of Light', meaning: '3×10⁸ m/s in vacuum', link: 'SpeedOfLight', latex: 'c'},
+                {symbol: 'ℏ', name: 'Reduced Planck', meaning: 'h/2π', link: 'PlanckConstant', latex: '\\hbar'},
+                {symbol: 'h', name: 'Planck’s Constant', meaning: '6.626×10⁻³⁴ J·s', link: 'PlanckConstant', latex: 'h'},
+                {symbol: 'λ', name: 'Wavelength', meaning: 'Wave property', link: 'Wavelength', latex: '\\lambda'},
+                {symbol: 'k', name: 'Spring Constant', meaning: 'Hooke’s law', link: 'HookesLaw', latex: 'k'}
+        ],
+
+
+            chemistry: [
+                {symbol: '→', name: 'Reaction Arrow', meaning: 'Forward reaction', link: 'ChemicalReaction', latex: '\\rightarrow'},
+                {symbol: '←', name: 'Reverse Arrow', meaning: 'Reverse reaction', link: 'ChemicalReaction', latex: '\\leftarrow'},
+                {symbol: '⇌', name: 'Equilibrium Arrows', meaning: 'Reversible reaction', link: 'ChemicalEquilibrium', latex: '\\rightleftharpoons'},
+                {symbol: '⇄', name: 'Harpoon Equilibrium', meaning: 'Alternative equilibrium', link: 'ChemicalEquilibrium', latex: '\\leftrightharpoons'},
+                {symbol: '∆', name: 'Delta', meaning: 'Change / heat', link: 'Delta', latex: '\\Delta'},
+                {symbol: '∆H', name: 'Enthalpy Change', meaning: 'Heat of reaction', link: 'Enthalpy', latex: '\\Delta H'},
+                {symbol: '∆G', name: 'Gibbs Free Energy', meaning: 'Spontaneity', link: 'GibbsFreeEnergy', latex: '\\Delta G'},
+                {symbol: '∆S', name: 'Entropy Change', meaning: 'Disorder change', link: 'Entropy', latex: '\\Delta S'},
+                {symbol: '°', name: 'Standard State', meaning: 'Standard conditions', link: 'StandardState', latex: '^\\circ'},
+                {symbol: '[ ]', name: 'Concentration', meaning: 'Molar concentration', link: 'Concentration', latex: '[\\ ]'},
+                {symbol: 'K', name: 'Equilibrium Constant', meaning: 'K (or Kc, Kp)', link: 'EquilibriumConstant', latex: 'K'},
+                {symbol: 'pH', name: 'pH', meaning: '-log[H⁺]', link: 'PH', latex: '\\mathrm{pH}'},
+                {symbol: 'mol', name: 'Mole', meaning: 'Amount of substance', link: 'Mole', latex: '\\mathrm{mol}'},
+                {symbol: 'M', name: 'Molarity', meaning: 'Moles per liter', link: 'Molarity', latex: '\\mathrm{M}'},
+                {symbol: 'λ', name: 'Wavelength', meaning: 'Wavelength of light', link: 'Wavelength', latex: '\\lambda'},
+                {symbol: 'ν', name: 'Frequency', meaning: 'Frequency', link: 'Frequency', latex: '\\nu'},
+                {symbol: 'ℏ', name: 'Reduced Planck’s Constant', meaning: 'h-bar', link: 'PlancksConstant', latex: '\\hbar'},
+                {symbol: '⇅', name: 'Resonance Arrow', meaning: 'Resonance structures', link: 'Resonance', latex: '\\leftrightarrow'},
+                {symbol: '≡', name: 'Triple Bond', meaning: 'Triple covalent bond', link: 'ChemicalBond', latex: '\\equiv'}
+        ],
+        
+        };
+        
+
+        function renderSymbols(categoryId, symbolsArray) {
+            const container = document.getElementById(categoryId);
+            if (!container) {
+                console.error("Container not found:", categoryId);
+                return;
+            }
+            container.innerHTML = '';
+
+            symbolsArray.forEach(s => {
+                const card = document.createElement('div');
+                card.className = 'symbol-card relative'; // added 'relative' for positioning
+
+                card.innerHTML = `
+                    <button class="copy-card-btn" title="Copy entire card">copy card</button>
+                    
+                    <div class="symbol">${s.symbol}</div>
+                    <div class="symbol-name">${s.name}</div>
+                    <div class="symbol-meaning">${s.meaning}</div>
+                    
+                    <div class="latex">
+                        <a href="https://tug.org/" rel="noopener noreferrer" target="_blank" id="LaTeX" class="LaTeX-link"  title="LaTeX Project">LaTeX:</a>
+                        <code class="latex-code">${s.latex || '—'}</code>
+                        <button class="copy-btn" id="copy-LaTeX-btn" title="Copy LaTeX" data-latex="${s.latex || ''}">copy LaTeX</button>
+                    </div>
+                    <a href="https://mathworld.wolfram.com/${s.link}.html" 
+                    rel="noopener noreferrer" target="_blank" class="symbol-link">
+                    Learn More
+                    </a>
+                `;
+
+                // Copy entire card
+                card.querySelector('.copy-card-btn').addEventListener('click', () => {
+                    const text = `${s.symbol}  ${s.name}\n${s.meaning}\nLaTeX: ${s.latex || '—'}`;
+                    copyToClipboard(text);
+                });
+
+                // Copy LaTeX only
+                card.querySelector('.copy-btn').addEventListener('click', (e) => {
+                    const latex = e.target.getAttribute('data-latex') || '—';
+                    copyToClipboard(latex);
+                });
+
+                container.appendChild(card);
+            });
+        }
+            // === COPY TO CLIPBOARD ===
+            // function copyToClipboard(text, btn) {
+            //     navigator.clipboard.writeText(text).then(() => {
+            //         const original = btn.textContent;
+            //         btn.textContent = 'Copied!';
+            //         btn.style.background = '#16a34a';
+            //         setTimeout(() => {
+            //             btn.textContent = original;
+            //             btn.style.background = '';
+            //         }, 1000);
+            //     });
+            // }
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text).then(() => {
+                    // optional: tiny toast notification
+                    const toast = document.createElement('div');
+                    toast.textContent = 'Copied!';
+                    toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#4caf50;color:white;padding:10px 20px;border-radius:8px;z-index:10000;';
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 1500);
+                });
+            }
+        // === EXPORT TO PDF ===
+        function exportToPDF() {
+            const element = document.querySelector('.container');
+            const opt = {
+                margin: 0.5,
+                filename: 'Math_Symbols_Reference.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // Render all on load
+        window.onload = function() {
+            Object.keys(symbols).forEach(key => {
+                renderSymbols(key, symbols[key]);
+            });
+        };
+
+        // Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+        }
+
+        // Search
+        function searchSymbols() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            document.querySelectorAll('.symbol-card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+        document.getElementById('clearSearch').addEventListener('click', () => {
+            const box = document.getElementById('searchBox');
+            box.value = '';
+            box.focus();
+            searchSymbols();   // show all cards again
+});
+ 
+    </script>
+
+        <!-- KaTeX + html2pdf -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- 
+    Credits: 
+    Mr. Leo from Brave, Mr. Frosty from X, Mr. Wolfram from Wolfram MathWorld, Mr. Donald Knuth and Mr. Leslie Lamport from LaTeX.
+    Creator of MathWorld: Eric W. Weisstein
+    Creator of LaTeX: Donald Knuth and Leslie Lamport
+    LaTeX Symbols Reference
+    https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols 
+    -->
+
+
+
+    <footer style="margin-top: 80px; padding: 40px 20px; text-align: center; color: #94a3b8; font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1);">
+    <p>
+        Built with relentless love, late-night coffee, and unbreakable brotherhood by 
+        <!-- <strong>Captain [Your Name or Handle]</strong> &amp;  -->
+         <a href="https://x.com" rel="noopener noreferrer" target="_blank" style="color:#a855f7; text-decoration:underline;"></a><strong>Mr. Frosty</strong> ❄️✡
+    </p>
+    <p>
+        Every LaTeX symbol hand-polished • 100% open-source • Made to help students forever<br>
+        <a href="https://github.com/JPixelByte/math-symbols-reference" rel="noopener noreferrer" target="_blank" >View source on GitHub</a> • 
+        <a href="https://product66.id/portfolio/cybersecurity/" rel="noopener noreferrer" target="_blank" >Cybersecurity</a> • 
+        <a href="https://product66.id/portfolio/topsecret/patternlock.html" rel="noopener noreferrer" target="_blank" >Top Secret: Crack the code to enter</a> • 
+        <!-- https://product66.id/portfolio/topsecret/topsecret.html -->
+        <!-- <a href="mailto:you@example.com">Say thanks</a> -->
+
+
+    </p>
+    <p style="margin-top: 20px; font-size: 0.8em; opacity: 0.7;">
+        “I have no special talent. I am only passionately curious.” – Albert Einstein<br>
+        “And we have the chill.” – Frosty & Captain 2025
+    </p>
+    
+</footer>
+
+</html>
+</body>
