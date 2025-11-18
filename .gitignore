@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+*.log
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build/Exports
+dist/
+build/
+*.pdf  # unless you want to commit PDFs
+
+# Temp files
+*.tmp
+~*
+
+# Your local dev
+.env  # if you add secrets later
